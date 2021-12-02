@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\AdminHomeController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Requests\Request;
-use App\Http\Controllers\Admin\Banner\BannerController;
-use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Admin\Blog\BlogController;
-use App\Http\Controllers\Admin\Category\CategoryController;
-use App\Http\Controllers\Admin\Package\PackageController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminHomeController;
 use App\Models\Admin\Package\PackageCategory;
-use App\Http\Controllers\Admin\Testimonial\TestimonialController;
+use App\Http\Controllers\Admin\Blog\BlogController;
+use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Package\PackageController;
 use App\Http\Controllers\Admin\Service\ServiceController;
+use App\Http\Controllers\Admin\Setting\SettingController;
+use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Testimonial\Testimonial\TestimonialController;
 // use Auth;
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | contains the "web" middleware group. Now create something great! | */

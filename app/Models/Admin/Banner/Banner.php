@@ -12,10 +12,10 @@ class Banner extends Model
     use HasFactory;
     use softDeletes;
 
-    protected $fillable = [
-        'top_heading',
-        'bottom_heading',
-        'image',
-        'created_by',
+    use HasFactory;
+    protected $fillable =[
+        'title',
+        'slug',
+        'image'
     ];
 }

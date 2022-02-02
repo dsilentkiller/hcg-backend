@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Models\Admin\Setting;
+
+
+
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,18 +14,24 @@ class Setting extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        'title',
-        'image',
         'logo',
         'icon',
-        'description',
-        'summary',
-        'slug',
-        'meta_keywords',
-        'meta_description',
-        'name',
-        'email',
+        'updated_by',
+        'open_time',
+        'close_time',
+        'open_day',
+        'close_day',
+        'location',
         'contact_no',
-        'address',
+        'facebook_link',
+        'twitter_link',
+        'linkdlin_link',
+        'instagram_link',
+        'youtube_link',
+        'email',
+        'title_tag',
+        'meta_description',
+        'meta_keywords',
+
     ];
 }

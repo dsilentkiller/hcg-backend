@@ -10,7 +10,7 @@ class CreateSettingsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     * 
+     *
      */
 
     public function up()
@@ -18,34 +18,25 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name')->unique();
-            $table->string('title', 100)->nullable()->default('text');
-
-            $table->string('image')->nullable();
-
-            $table->softDeletes();
+            $table->string('email')->unique();
+            $table->string('close_day');
+            $table->string('open_day');
+            $table->string('open_time');
+            $table->string('close_time');
+            $table->bigInteger('contact_no')->unique();
             $table->string('logo');
             $table->string('icon');
-            $table->longtext('description')->nullable()->default('text');
-            ;
-            $table->longtext('summary')->nullable()->default('text');
-            ;
-            $table->string('slug')->nullable();
-            $table->longtext('meta_keywords')->nullable()->default('text');
-            ;
-            $table->longtext('meta_description')->nullable()->default('text');
-            ;
-            $table->string('email')->unique();
-            $table->integer('updated_by');
-
-            $table->bigInteger('contact_no')->nullable()->default(10);
-
-            $table->string('address')->nullable();
-            ;
-
-
-
-
+            $table->longText('location')->nullable();
+            $table->string('title_tag');
+            // $table->longText('summary')->nullable();
+            // $table->longText('description')->nullable();
+            $table->longText('meta_keywords')->nullable();
+            $table->longText('meta_description')->nullable();
+            $table->bigInteger('updated_)by');
+            $table->string('twitter_link');
+            $table->string('linkdlin_link');
+            $table->string('instagram_link');
+            $table->string('youtube_link');
         });
     }
 

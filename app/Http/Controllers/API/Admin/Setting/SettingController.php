@@ -1,6 +1,6 @@
 <?php
+namespace App\git\website\;
 
-namespace App\Http\Controllers\Admin\Setting;
 // use Illuminate\Support\Facades\Route;
 
 use App\Models\Admin\Setting\Setting;
@@ -8,7 +8,7 @@ use App\Models\Admin\Setting\Setting;
 use Illuminate\Http\Request;
 use App\Support\ImageSupport;
 use App\Http\Controllers\Controller;
-use Auth;
+
 
 class SettingController extends Controller
 {
@@ -128,7 +128,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //  
+        //
         $this->setting = $setting; //setting variable declartaion
         $this->setting->fill($request->all());
         //logo file check
@@ -145,7 +145,7 @@ class SettingController extends Controller
             $this->setting->icon = $icon;
         }
 
-        //user updated 
+        //user updated
 
         $this->setting->updated_by = Auth::user()->id;
         //setting file save

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Banner;
+namespace App\Http\Controllers\API\Admin\Banner;
 
-use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Route;
-use App\Models\Admin\Banner\Banner;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
+
 use App\Support\ImageSupport;
-use App\Http\Requests\BannerRequest;
-use App\Http\Requests\BannerUpdateRequest;
 use Kamaln7\Toastr\Facades\Toastr;
-use App\Http\Requests\Request;
-use Auth;
+use App\Models\Admin\Banner\Banner;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\BannerRequest;
+use Illuminate\Support\Facades\Auth;
+
+
 class BannerController extends Controller
 {
     protected $folderName = 'admin.banner.'; //folder directoery
@@ -34,23 +34,23 @@ class BannerController extends Controller
     public function index()
     {
         return view($this->folderName . 'form', [
-            'activePage' => 'setting',
+            'activePage' => 'banner_create',
             'banners' => $this->getBanners(),
             'n' => 1,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     
-     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function create()
+    {
+        //
+        return view($this->folderName.'form',[
+            'activePage' =>'banner_create',
+            'page'=>'banner',
+        ]);
+    }
+
+
+
     public function store(BannerRequest $request)
     {
         //
@@ -116,7 +116,7 @@ class BannerController extends Controller
         $this->banner->created_by = Auth::user()->id;
         if (!$request->file('image') == '') {
             $this->imageSupport->deleteImg('banner', $this->banner->image);
-            $image = $this->imageSupport->saveAnyImg($request, 'banners', 'image', $this->imageWidht, $this->imageHeight);
+            $image = $this->imageSupport->saveAnyImg($request, 'banners', 'image', $this->imageWidth, $this->imageHeight);
             $this->banner->image = $image;
         }
         if ($this->banner->save()) {

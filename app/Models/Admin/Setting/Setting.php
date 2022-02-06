@@ -1,6 +1,7 @@
 <?php
 
 
+namespace App\Models\Admin\Setting;
 
 
 

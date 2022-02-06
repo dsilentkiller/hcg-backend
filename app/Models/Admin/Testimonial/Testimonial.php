@@ -1,20 +1,20 @@
 <?php
 namespace App\Models\Admin\Testimonial;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TestimonialRequest;
-use App\Support\ImageSupport;
-use Illuminate\Http\Request;
-use Kamaln7\Toastr\Facades\Toastr;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Testimonial extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'speech',
         'image',
         'summary',
+        'client_name',
+        'profession',
+        'created_by',
         'status',
     ];
 }

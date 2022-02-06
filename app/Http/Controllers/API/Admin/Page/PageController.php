@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Page;
 
-use App\Models\Admin\Page\Page;
+
 use Illuminate\Http\Request;
 use App\Support\ImageSupport;
-use Auth;
-use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\Admin\Page\Page;
 use Kamaln7\Toastr\Facades\Toastr;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PageController extends Controller
 {

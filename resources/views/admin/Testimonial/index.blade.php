@@ -15,7 +15,9 @@
 								<tr>
 									<th>#</th>
 									<th>Name</th>
-									<th>Speech</th>
+									<th>Summary</th>
+                                    <th>Image</th>
+                                    <th>Profession</th>
 									<th colspan="3">Action</th>
 								</tr>
 							</thead>
@@ -25,8 +27,10 @@
 								<tr>
 									<td>{{$n++}}</td>
 									<td>{{$testimonial->name}}</td>
-									<td>{{$testimonial->speech}}</td>
-									<td><a href="{{route('testimonial.edit', $testimonial)}}">Edit</a></td>
+									<td>{{$testimonial->summary}}</td>
+                                    <td>{{$testimonial->image}}</td>
+                                    <td>{{$testimonial->profession}}</td>
+									<td><a href="{{route('testimonial.edit', $testimonial)}}" class="btn-link">Edit</a></td>
 									<td>
 										<form action="{{route('testimonial.destroy', $testimonial)}}" method="post">
 											@csrf

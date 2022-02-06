@@ -16,18 +16,18 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             $table->string('title', 100)->nullable()->default('text');
-
-            $table->string('heading', 100)->nullable()->default('text');
-
+            // $table->bigInteger('category_id')->nullable();
             $table->string('image', 100)->nullable()->default('text');
-
             $table->longText('description')->nullable()->default('text');
-
-            $table->integer('start_from')->unsigned()->nullable()->default(12);
-
             $table->integer('created_by')->unsigned()->nullable()->default(12);
+            $table->longText('summary');
+            $table->longText('title_tag');
+            $table->longText('meta_description');
+            $table->longText('meta_keywords');
+            $table->string('thumbnail');
+            $table->string('slug')->nullable();
+            $table->string('category_name')->nullable()->default('text');
             $table->softDeletes();
         });
     }

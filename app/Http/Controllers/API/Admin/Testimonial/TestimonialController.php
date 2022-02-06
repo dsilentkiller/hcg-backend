@@ -1,23 +1,14 @@
 <?php
-namespace App\Http\Controllers\Admin\Testimonial;
+namespace App\Http\Controllers\API\Admin\Testimonial;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestimonialRequest;
-// use App\Models\Admin\Testimonial\Testimonial;
+use App\Models\Admin\Testimonial\Testimonial;
 use App\Support\ImageSupport;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 
-use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Route;
-use App\Models\Admin\Banner\Banner;
-// use Illuminate\Http\Request;
-use App\Support\ImageSupport;
-use App\Http\Requests\BannerRequest;
-use App\Http\Requests\BannerUpdateRequest;
-use Kamaln7\Toastr\Facades\Toastr;
-use App\Http\Requests\Request;
-use Auth;
+
 
 
 class TestimonialController extends Controller
@@ -78,7 +69,7 @@ class TestimonialController extends Controller
         //
         $this->testimonial->fill($request->all());
         if (!$request->file('image') == '') {
-            $this->testimonial->image = $this->imageSupprot->saveAnyImg($request, 'testimonial', 'image', $imageWidth, $imageHeight);
+            $this->testimonial->image = $this->imageSupprot->saveAnyImg($request, 'testimonial', 'image', $this->imageWidth, $this->imageHeight);
         }
         if (!$request->has('status')) {
             $this->testimonial->status = false;
@@ -98,6 +89,11 @@ class TestimonialController extends Controller
     public function show(Testimonial $testimonial)
     {
     //
+    return view($this->folderName . 'show', [
+        'activePage' => 'testimonial_show',
+        'page' => 'testimonial',
+        'testimonial' => $testimonial,
+    ]);
     }
 
     /**
@@ -130,7 +126,7 @@ class TestimonialController extends Controller
         $this->testimonial->fill($request->all());
         if (!$request->file('image') == '') {
             $this->imageSupprot->deleteImg('testimonial', $this->testimonial->image);
-            $this->testimonial->image = $this->imageSupprot->saveAnyImg($request, 'testimonial', 'image', $imageWidth, $imageHeight);
+            $this->testimonial->image = $this->imageSupprot->saveAnyImg($request, 'testimonial', 'image',$this->imageWidth, $this->imageHeight);
         }
         if (!$request->has('status')) {
             $this->testimonial->status = false;

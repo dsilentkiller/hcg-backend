@@ -6,7 +6,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">Service List</h3>
+						<h3 class="card-title">service List</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -15,21 +15,23 @@
 								<tr>
 									<th>#</th>
 									<th>Service Name</th>
-									<th>Description</th>
+                                    <th>Category Name</th>
+									<th>Summary</th>
 									<th colspan="3">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								@if(isset($serviceCategories) && count($serviceCategories)>0)
-								@foreach($serviceCategories as $serviceeCategory)
+								@if(isset($services) && count($services)>0)
+								@foreach($services as $service)
 								<tr>
 									<td>{{$n++}}</td>
-									<td>{{$serviceCategory->name}}</td>
-									<td>{{Substr($serviceCategory->description, 0, 200)}}</td>
-									<td><a href="{{route('service_category.show', $serviceCategory)}}">View</a></td>
-									<td><a href="{{route('service_category.edit', $serviceCategory)}}">Edit</a></td>
+									<td>{{$service->name}}</td>
+                                    <td>{{$service->category_name}}</td>
+									<td>{{Substr($service->summary, 0, 200)}}</td>
+									<td><a href="{{route('service.show', $service)}}">View</a></td>
+									<td><a href="{{route('service.edit', $service)}}">Edit</a></td>
 									<td>
-										<form action="{{route('service_category.destroy', $serviceCategory)}}" method="post">
+										<form action="{{route('service.destroy', $service)}}" method="post">
 											@csrf
 											{{method_field('DELETE')}}
 											<button type="submit" class="btn-link">Deleted</button>
@@ -47,7 +49,7 @@
 							</tbody>
 						</table>
 
-						{{$serviceCategories->links()}}
+						{{$services->links()}}
 					</div>
 					<!-- /.card-body -->
 				</div>

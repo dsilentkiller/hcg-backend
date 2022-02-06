@@ -1,13 +1,22 @@
 <?php
-namespace App\git\website\;
+namespace App\Http\Controllers\API\Admin\Setting;
+
+
 
 // use Illuminate\Support\Facades\Route;
 
-use App\Models\Admin\Setting\Setting;
+// use App\Models\Admin\Setting\Setting;
 
 use Illuminate\Http\Request;
 use App\Support\ImageSupport;
+use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Admin\Setting\Setting;
+
+
+
+
 
 
 class SettingController extends Controller
@@ -140,7 +149,7 @@ class SettingController extends Controller
 
         // icon file check
         if (!$request->file('icon') == '') {
-            $this->imageSupport - deleteImg('setting', $this->setting->icon);
+            $this->imageSupport ->deleteImg('setting', $this->setting->icon);
             $icon = $this->imageSupport->saveAnyImg($request, 'setting', 'icon', $this->iconWidth, $this->iconHeight);
             $this->setting->icon = $icon;
         }

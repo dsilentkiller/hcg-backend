@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\API\Admin\Category;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\CategoryUpdateRequest;
+
+
+use Illuminate\Http\Request;
 use App\Models\Admin\Category\Category;
-use App\Http\Controllers\Admin\Category\CategoryController;
+// use App\Http\Controllers\API\Admin\Category\CategoryController;
 use App\Support\ImageSupport;
 // use App\Support\Slug;
-use Auth;
-use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -129,7 +131,7 @@ class CategoryController extends Controller
             $this->category->image = $image;
         }
         $this->category->created_by = Auth::user()->id;
-        $this->category->slug = Slug::getSlug($this->category->name);
+        // $this->category->slug = Slug::getSlug($this->category->name);
         if ($this->category->save()) {
             Toastr::success('Successfully 1 destination category has updated', 'Success !!!', ["positionClass" => "toast-bottom-right"]);
             return redirect()->route('category.index')->with('success', 'Successfully 1 destination category has updated');

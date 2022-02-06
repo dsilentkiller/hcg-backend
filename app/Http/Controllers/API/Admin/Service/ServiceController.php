@@ -1,67 +1,73 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Service;
-
-
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ServiceRequest;
-use App\Http\Requests\ServiceUpdateRequest;
-// use App\Models\Admin\Service\Service; //model path diretory
-use App\Support\ImageSupport;
-use Auth;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Support\Facades\DB;
-use Kamaln7\Toastr\Facades\Toastr;
-
-
+namespace App\Http\Controllers\API\Admin\Service;
 
 
 
 use Illuminate\Http\Request;
+use App\Support\ImageSupport;
+use Illuminate\Support\Facades\DB;
+use App\Models\Admin\Service\Service; //model path diretory
+use Kamaln7\Toastr\Facades\Toastr;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ServiceRequest;
+use App\Http\Requests\ServiceUpdateRequest;
+use App\Models\Admin\service\serviceCategory;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+
+
 
 class ServiceController extends Controller
 {
-    protected $imageSupport; //image
-    protected $folderName = 'admin.service.'; //service directory
-    protected $imageHeight = 450;
-    protected $imageWidth = 750;
-    function __construct(ImageSupport $imageSupport, Service $service)
-    {
-        $this->middleware('auth');
+    protected $folderName ='admin.service.';
+    protected $imageSupport;
+    protected $service;
+    protected $imageWidth = 500;
+    protected $imageHeight = 600;
+    protected $thumbnailWidth = 500;
+    protected $thumbnailHeight = 600;
+
+    function  __construct(ImageSupport $imageSupport, service $service){
+
+        $this ->middleware('auth');
         $this->imageSupport = $imageSupport;
-        $this->service = $service;
+        $this->service =$service;
     }
+
+    public function getservices($n){
+        return service::orderByDesc('created_at')->paginate($n);
+    }
+    // public function getSlug($toSlug)
+    // {
+
+    //     return SlugService::createSlug(service::class , 'slug', $toSlug);
+    // }
+
+
+
     public function index()
     {
         //
-        return view($this->folderName . 'index', [
-            'page' => 'service',
-            'n' => 1,
-            'activePage' => 'sevice_list',
-            'services' => $this->getServices(10),
+        return view($this->folderName.'index',[
+            'services' =>$this->getservices(10),
+            'activePage' =>'service_list',
+            'page' =>'service',
+            'n' =>1,
         ]);
     }
 
-    public function getSlug($toSlug)
-    {
-        return SlugService::createSlug(Service::class , 'slug', $toSlug);
-    }
-    public function getServices($n)
-    {
-        return Service::orderByDesc('created_at')->paginate($n);
-    }
-    public function getPackageCategories()
-    {
-        return PackageCategory::orderByDesc('created_at')->get();
-    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
-
-        return view($this->folderName . 'form', [
-            'page' => 'service',
-            'activePage' => 'service_create',
-            'serviceCategories' => $this->getServiceCategories(),
+        return view($this->folderName.'form',[
+            'activePage' =>'service_list',
+            'page' =>'service',
         ]);
     }
 
@@ -71,63 +77,83 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ServiceRequest $request)
+    public function store(Request $request)
     {
         //
-        $this->service->fill($request->all());
-        $this->service->service_category_id = $request->service_category;
+
+        // $input = $request->all();
+        // Auth::user()->save->service($input);
+        // $image = $this->imageSupport->saveAnyImg($request, 'service','image', $this->imageWidth,$this->imageHeight);
+        // $this->service ->image = $image;
+        // $this->service ->thumbnail = $thumbnail;
+        $this-> service->fill($request->all());
+        $this->service->title_tag = $request->title_tag;
         $this->service->created_by = Auth::user()->id;
-        if (!$request->file('image') == '') {
-            $image = $this->imageSupport->saveAnyImg($request, 'service', 'image', $this->imageWidth, $this->imageHeight);
-            $this->service->image = $image;
+
+        // $this->service->slug =$this->getSlug($this->service->title);
+
+        if(!$request->file('thumbnail') == ''){
+            $this->imageSupport->deleteImg('service', $this->service->thumbnail);
+            $thumbnail = $this->imageSupport->saveAnyImg($request, 'service', 'thumbnail', $this->thumbnailWidth, $this->thumbnailHeight);
+            $this->service->thumbnail = $thumbnail;
         }
-        if ($this->service->save()) {
-            if (!$request->file('images') == '') {
+        if($this->service->save()){
+            if(!$request->file('images')==''){
+                foreach($this->service->thumbnails as $img){
+                    $this->imageSupport->deleteImg('service', $img->image);
+                    $this->service->thumbnails()->delete();
+                }
+                $this->service->thumbnails()->delete();
                 foreach ($request->file('images') as $image) {
                     $image = $this->imageSupport->saveGallery($image, 'service', $this->imageWidth, $this->imageHeight);
-                    DB::table('images')->insert([
-                        ['serviceid' => $this->service->id, 'image' => $image, 'created_at' => \Carbon\Carbon::now()],
-                    ]);
+                    // DB::table('thumbnails')->insert([
+                    //     ['service_id'=>$this->service->id, 'image' => $image, 'updated_at'=>\Carbon\Carbon::now()],
+                    // ]);
                 }
             }
-            Toastr::success('Successfully Service Created', 'Success !!!', ['positionClass' => 'toast-bottom-right']);
-            return redirect()->route('service.index')->with('success', 'Successfully Package Created');
+        if ($this->service->save()){
+            Toastr::Success('Successfully 1 service has been added','success',['positionClass'=>'toast-bottom-right']);
+            return redirect()->route('service.index')->with('success','Successfully i service has been Added');
+        }else{
+            return back()->withInput()->with('error','Couldnot be saved,please try again later');
+
         }
-        else {
-            return back()->withInput()->with('error', 'Service Could not be created please try again later');
-        }
-    }
+
+        }}
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(service $service)
     {
         //
-        return view($this->folderName . 'show', [
-            'page' => 'service',
-            'activePage' => 'service_list',
-            'service' => $service,
+        // return $service;
+        return view($this->folderName.'show',[
+            'activePage' =>'service_list',
+            'service'=>$service,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(service $service)
     {
         //
-        return view($this->folderName . 'form', [
+        return view($this->folderName.'form',[
+            'activePage' =>'service_create',
+            // 'services'=>$this->getservices,
+            'n'=>1,
+            'service' =>$service,
             'page' => 'service',
-            'activePage' => 'service_create',
-            'serviceCategories' => $this->getServiceCategories(),
-            'service' => $service,
+
         ]);
     }
 
@@ -135,63 +161,70 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, service $service)
     {
         //
-        $this->service = $service;
-        $this->service->fill($request->all());
-        $this->service->service_category_id = $request->service_category;
-        $this->service->created_by = Auth::user()->id;
-        $this->service->slug = $this->getSlug($this->service->name);
-        $this->service->slug = $this->getSlug($this->service->name);
-        if (!$request->file('image') == '') {
-            $this->imageSupport->deleteImg('service', $service->image);
-            $image = $this->imageSupport->saveAnyImg($request, 'service', 'image', $this->imageWidth, $this->imageHeight);
-            $this->service->image = $image;
+        $this->service =$service;
+        $this -> service ->fill($request->all());
+        $this->service->created_by = Auth::User()->id;
+        $this->service->title_tag = $request->title_tag;
+        // if(!$request->file('image')==''){
+        //     $this->imageSupport->deleteImg('service', $this->service->image);
+        // $this->service->slug =$this->getSlug($this->service->title);
+        //     $this->service->image = $this->imageSupport->saveAnyImg($request, 'service','image',$this->imageHeight, $this->imageWidth);
+
+        // }
+
+        if(!$request->file('thumbnail') == ''){
+            $this->imageSupport->deleteImg('service', $this->service->thumbnail);
+            $thumbnail = $this->imageSupport->saveAnyImg($request, 'service', 'thumbnail', $this->thumbnailWidth, $this->thumbnailHeight);
+            $this->service->thumbnail = $thumbnail;
         }
-        if ($this->service->save()) {
-            if (!$request->file('images') == '') {
-                foreach ($this->service->images as $img) {
+        if($this->service->save()){
+            if(!$request->file('images')==''){
+                foreach($this->service->thumbnails as $img){
                     $this->imageSupport->deleteImg('service', $img->image);
-                    $this->service->images()->delete();
+                    $this->service->thumbnails()->delete();
                 }
-                $this->service->images()->delete();
+                $this->service->thumbnails()->delete();
                 foreach ($request->file('images') as $image) {
                     $image = $this->imageSupport->saveGallery($image, 'service', $this->imageWidth, $this->imageHeight);
-                    DB::table('images')->insert([
-                        ['service_id' => $this->service->id, 'image' => $image, 'updated_at' => \Carbon\Carbon::now()],
-                    ]);
+                    // DB::table('thumbnails')->insert([
+                    //     ['service_id'=>$this->service->id, 'image' => $image, 'updated_at'=>\Carbon\Carbon::now()],
+                    // ]);
                 }
             }
-            Toastr::success('Successfully service Updates', 'Success !!!', ['positionClass' => 'toast-bottom-right']);
-            return redirect()->route('service.index')->with('success', 'Successfully service Created');
-        }
-        else {
-            return back()->withInput()->with('error', 'service Could not be created please try again later');
-        }
-    }
 
+        }
+
+
+
+        if ($this->service->save()){
+            Toastr::Success('Successfully 1 service has been added','success',['positionClass'=>'toast-bottom-right']);
+            return redirect()->route('service.index')->with('success','Successfully i service has been Added');
+        }else{
+            return back()->withInput()->with('error','Couldnot be saved,please try again later');
+
+        }
+
+    }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(service $service)
     {
         //
-
-        $service->images->delete();
-        if ($service->delete()) {
-            Toastr::success('Successfully 1 service Deleted', 'Success !!!', ['positionClass' => 'toast-bottom-right']);
-            return redirect()->route('service.index')->with('success', 'Successfully 1 service Deleted');
-        }
-        else {
+        if($service->delete()){
+            return redirect()->route('service.index')->with('success', 'Successfully 1 service has deleted');
+        }else{
             return back()->with('error', 'Could not be deleted please try again later');
         }
     }

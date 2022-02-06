@@ -21,13 +21,15 @@
 										<label>Status:</label>
 										 <input type="checkbox" name="status" value="1" data-bootstrap-switch @if(isset($testimonial)) @if($testimonial->status) checked @endif @else checked @endif>
 									</div>
+                                    {{-- Client Name --}}
 									<div class="form-group">
-										<label for="title">Name:</label>
-										<input type="text" name="name" class="form-control" placeholder="Enter Destination Name" value="{{old('name', @$testimonial->name)}}">
+										<label for="title">Client Name:</label>
+										<input type="text" name="name" class="form-control" placeholder="Enter Client  Name" value="{{old('name', @$testimonial->name)}}">
 										@error('name')
 										<span class="alert alert-danger">{{$message}}</span>
 										@enderror
 									</div>
+                                    {{-- image --}}
 									<div class="form-group">
 										<label>Choose Profile:</label><br>
 										<label for="image">
@@ -37,17 +39,19 @@
 										<span>{{$message}}</span>
 										@enderror
 									</div>
-									<div class="form-group">
-										<label for="title">Speech:</label>
-										<textarea class="form-control" style="height: 100px;" name="speech">{{old('speech', @$testimonial->speech)}}</textarea>
-										@error('speech')
-										<span class="alert alert-danger">{{$message}}</span>
-										@enderror
-									</div>
+									{{-- Summary --}}
 									<div class="form-group">
 										<label for="title">Summary</label>
 										<textarea class="form-control" style="height: 100px;" name="summary">{{old('summary', @$testimonial->summary)}}</textarea>
 										@error('summary')
+										<span class="alert alert-danger">{{$message}}</span>
+										@enderror
+									</div>
+                                    {{-- profession --}}
+                                    <div class="form-group">
+										<label for="title">Profession</label>
+										<input type="text" name="profession" class="form-control" placeholder="Enter Client  Profession" value="{{old('profession', @$testimonial->profession)}}">
+										@error('profession')
 										<span class="alert alert-danger">{{$message}}</span>
 										@enderror
 									</div>

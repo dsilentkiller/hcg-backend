@@ -6,7 +6,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">packageCategory List</h3>
+						<h3 class="card-title">projectCategory List</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -14,22 +14,22 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Package Category Name</th>
+									<th>project Category Name</th>
 									<th>Summary</th>
 									<th colspan="3">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								@if(isset($packageCategories) && count($packageCategories)>0)
-								@foreach($packageCategories as $packageCategory)
+								@if(isset($projectCategories) && count($projectCategories)>0)
+								@foreach($projectCategories as $projectCategory)
 								<tr>
 									<td>{{$n++}}</td>
-									<td>{{$packageCategory->name}}</td>
-									<td>{{Substr($packageCategory->summary, 0, 200)}}</td>
-									<td><a href="{{route('package_category.show', $packageCategory)}}">View</a></td>
-									<td><a href="{{route('package_category.edit', $packageCategory)}}">Edit</a></td>
+									<td>{{$projectCategory->name}}</td>
+									<td>{{Substr($projectCategory->summary, 0, 200)}}</td>
+									<td><a href="{{route('project_category.show', $projectCategory)}}">View</a></td>
+									<td><a href="{{route('project_category.edit', $projectCategory)}}">Edit</a></td>
 									<td>
-										<form action="{{route('package_category.destroy', $packageCategory)}}" method="post">
+										<form action="{{route('project_category.destroy', $projectCategory)}}" method="post">
 											@csrf
 											{{method_field('DELETE')}}
 											<button type="submit" class="btn-link">Deleted</button>
@@ -47,7 +47,7 @@
 							</tbody>
 						</table>
 
-						{{$packageCategories->links()}}
+						{{$projectCategories->links()}}
 					</div>
 					<!-- /.card-body -->
 				</div>

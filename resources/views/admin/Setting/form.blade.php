@@ -3,7 +3,7 @@
 <section class="content">
 	<div class="container-fluid">
 
-    
+
 		<hr>
 		@if(isset($setting))
 		{{--  setting route to create file  --}}
@@ -11,11 +11,11 @@
 			{{method_field('PATCH')}}
 			@else
 			{{--  seeting route to store  --}}
-			<form action="{{route('setting.store')}}" method="post" enctype="multipart/form-data">  
+			<form action="{{route('setting.store')}}" method="post" enctype="multipart/form-data">
 				@endif
 				<div class="row">
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-warning">
 							@csrf
 							<div class="card-header">
 							{{--  setting file is check   --}}
@@ -57,16 +57,16 @@
 									@enderror
 								</div>
                                 <!-- locstion-->
-								<div class="form-group">
+								{{-- <div class="form-group">
 									<label for="title">Address:</label>
 									<input type="text" name="location" class="form-control" placeholder="Enter Site location" value="{{old('location', @$setting->location)}}">
 									@error('location')
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror
-								</div>
-								
-								
-								
+								</div> --}}
+
+
+
 								<div class="form-group">
 									<label for="title">Contact No:</label>
 									<input type="number" name="contact_no" class="form-control" value="{{old('contact_no', @$setting->contact_no)}}">
@@ -74,7 +74,7 @@
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror
 								</div>
-								
+
 								<div class="form-group">
 									<label for="title">Location</label>
 									<input type="text" name="location" class="form-control" value="{{old('location', @$setting->location)}}">
@@ -91,20 +91,20 @@
 								<div class="card-title">Your Web Info</div>
 							</div>
 							<div class="card-body">
-								<div class="form-group">
+								{{-- <div class="form-group">
 									<label for="title">Summary</label>
 									<textarea class="form-control" style="height: 100px;" name="summary">{{old('summary', @$setting->summary)}}</textarea>
 									@error('summary')
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror
-								</div>
-								<div class="form-group">
+								</div> --}}
+								{{-- <div class="form-group">
 									<label for="title">Description</label>
 									<textarea class="form-control editor" style="height: 150px;" name="description">{{old('description', @$setting->description)}}</textarea>
 									@error('description')
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror
-								</div>
+								</div> --}}
 								<div class="form-group">
 									<label for="title">Title Tag:</label>
 									<input type="text" name="title_tag" class="form-control" value="{{old('title_tag', @$setting->title_tag)}}">
@@ -129,7 +129,7 @@
 							</div>
 							<div class="card-footer">
 								<div>
-									<button type="submit" class="btn btn-primary btn-lg float-right">
+									<button type="submit" class="btn btn-success btn-lg float-right">
 									@if(isset($setting)) Update @else Save @endif
 									</button>
 								</div>
@@ -137,7 +137,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</form>
 		</div>
 	</section>

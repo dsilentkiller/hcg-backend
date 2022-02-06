@@ -1,11 +1,11 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-      {{-- <img src="{{asset('vendors/dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8"> --}}
+    {{-- <a href="#" class="brand-link">
+      <img src="{{asset('vendors/dashboard/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
       <span class="brand-text font-weight-dark">HCG</span>
-    </a>
+    </a> --}}
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -14,9 +14,9 @@
         {{-- <div class="image">
           <img src="{{asset('vendors/dashboard/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div> --}}
-        {{-- <div class="info">
-          <a href="#" class="d-block"><h2>Himalayan Consulting Group</h2> </a>
-        </div> --}}
+        <div class="info">
+          <a href="#" class="d-block"><h2>H C G</h2> </a>
+        </div>
       </div>
 
       <!-- Sidebar Menu -->
@@ -36,7 +36,7 @@
 
             <li class="nav-item has-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('setting.create') }}" class="nav-link">
                         <i class="fas fa-cog"></i>
                     <p>
                         Setting
@@ -67,7 +67,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('banner.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Banner list</p>
                         </a>
@@ -85,13 +85,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('about.create') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>About create</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('about.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>About list</p>
                         </a>
@@ -109,13 +109,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('contact.create') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Contact create</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('contact.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Contact list</p>
                         </a>
@@ -133,13 +133,13 @@
                     </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('service.create') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Service create</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('service.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Service list</p>
                         </a>
@@ -157,20 +157,46 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href=" #" class="nav-link">
+                            <a href=" {{ route('testimonial.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Testimonial create</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('testimonial.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Testimonial list</p>
                             </a>
                         </li>
                     </ul>
             </li>
+
+                {{-- Project --}}
+                {{-- <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-project-diagram"></i>
+                        <p>
+                        Project
+                        <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href=" {{ route('project.create') }}" class="nav-link">
+                                <i class="fas fa-project-diagram"></i>
+                                <p>Project create</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('project.index') }}" class="nav-link">
+                                <i class="fas fa-project-diagram"></i>
+                                <p>Project list</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
 
 
         </ul>

@@ -6,7 +6,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">package List</h3>
+						<h3 class="card-title">project List</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -14,22 +14,22 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Package Name</th>
+									<th>project Name</th>
 									<th>Summary</th>
 									<th colspan="3">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								@if(isset($packages) && count($packages)>0)
-								@foreach($packages as $package)
+								@if(isset($projects) && count($projects)>0)
+								@foreach($projects as $project)
 								<tr>
 									<td>{{$n++}}</td>
-									<td>{{$package->name}}</td>
-									<td>{{Substr($package->summary, 0, 200)}}</td>
-									<td><a href="{{route('package.show', $package)}}">View</a></td>
-									<td><a href="{{route('package.edit', $package)}}">Edit</a></td>
+									<td>{{$project->name}}</td>
+									<td>{{Substr($project->summary, 0, 200)}}</td>
+									<td><a href="{{route('project.show', $project)}}">View</a></td>
+									<td><a href="{{route('project.edit', $project)}}">Edit</a></td>
 									<td>
-										<form action="{{route('package.destroy', $package)}}" method="post">
+										<form action="{{route('project.destroy', $project)}}" method="post">
 											@csrf
 											{{method_field('DELETE')}}
 											<button type="submit" class="btn-link">Deleted</button>
@@ -47,7 +47,7 @@
 							</tbody>
 						</table>
 
-						{{$packages->links()}}
+						{{$projects->links()}}
 					</div>
 					<!-- /.card-body -->
 				</div>

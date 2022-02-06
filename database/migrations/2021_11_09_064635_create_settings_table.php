@@ -37,6 +37,8 @@ class CreateSettingsTable extends Migration
             $table->string('linkdlin_link');
             $table->string('instagram_link');
             $table->string('youtube_link');
+            $table->integer('updated_by');
+            $table->SoftDeletes();
         });
     }
 

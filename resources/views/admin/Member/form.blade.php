@@ -1,6 +1,7 @@
 @extends('layouts.admin-app')
 @section('content')
 <section class="content">
+    {{ Breadcrumbs::render('member.create') }}
 	<div class="container-fluid">
 		@if(isset($member))
 		<form action="{{route('member.update', $member)}}" method="post" enctype="multipart/form-data">
@@ -13,7 +14,7 @@
 						<div class="card card-primary">
 							@csrf
 							<div class="card-header">
-								<div class="card-title">member @if(isset($member)) Update @else Addon @endif Form </div>
+								<div class="card-title">Member @if(isset($member)) Update @else Addon @endif Form </div>
 							</div>
 							<div class="card-body">
 								<div class="form-group">

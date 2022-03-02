@@ -54,6 +54,13 @@ class BannerController extends Controller
     public function store(BannerRequest $request)
     {
         //
+
+        // $this->validate($request,[
+        //     'title'=>'string|required|max:50',
+        //     // 'description'=>'string|nullable',
+        //     'image'=>'string|required',
+        //     // 'status'=>'required|in:active,inactive',
+        // ]);
         $this->banner->fill($request->all());
         $image = $this->imageSupport->saveAnyImg($request, 'banners', 'image', $this->imageWidth, $this->imageHeight);
         $this->banner->created_by = Auth::user()->id;
@@ -111,6 +118,13 @@ class BannerController extends Controller
     public function update(Request $request, Banner $banner)
     {
         //
+
+        // $request->validate([
+        //     'title'=>'string|required|max:50',
+        //     // 'description'=>'string|nullable',
+        //     'image'=>'string|required',
+        //     // 'status'=>'required|in:active,inactive',
+        // ]);
         $this->banner = $banner;
         $this->banner->fill($request->all());
         $this->banner->created_by = Auth::user()->id;

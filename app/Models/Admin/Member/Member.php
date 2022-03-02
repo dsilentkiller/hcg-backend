@@ -10,9 +10,9 @@ class Member extends Model
     use HasFactory;
     protected $fillable=[
         'image',
-        'summary',
-        'client_name',
-        'profession',
+        'name',
+        'job_post',
+        'status'
 
     ];
 }

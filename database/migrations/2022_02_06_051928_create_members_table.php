@@ -16,6 +16,12 @@ class CreateMembersTable extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('image');
+            $table->string('name')->default('ABC');
+            $table->string('job_post')->default('office staff');
+            $table->boolean('status');
+            $table->string('email')->default('hcg@gmail.com');
+            $table->text('summary')->default('Hcg family');
         });
     }
 

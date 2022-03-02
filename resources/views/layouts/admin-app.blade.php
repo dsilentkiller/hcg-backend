@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-    @if(isset($title)) {{$title}} @else This is an LTE APP @endif
+    @if(isset($title)) {{$title}} @else Himalayan Consulting Group @endif
     </title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href=" 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
@@ -41,12 +41,12 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Dashboard</h1>
           </div><!-- /.col -->
-          <div class="col-sm-6">
+          {{-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
-          </div><!-- /.col -->
+          </div><!-- /.col --> --}}
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>

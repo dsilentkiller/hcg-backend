@@ -31,7 +31,7 @@ class AboutController extends Controller
 
     public function index()
     {
-        return view($this->folderName.'index',[
+        return view($this->folderName.'form',[
             'abouts' => $this->getAbouts(10),
             'activePage' => 'About_list',
             'page' => 'about',
@@ -51,6 +51,9 @@ class AboutController extends Controller
         return view($this->folderName.'form',[
             'activePage' =>'about_create',
             'page' =>'about',
+            // $about =About::all(),
+            // return $about;
+
         ]);
     }
 

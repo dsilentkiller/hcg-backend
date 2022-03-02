@@ -17,7 +17,7 @@ class CreateTestimonialsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('client_name')->nullable();
-            $table->string('profession');
+            $table->string('profession')->default('hcg client');
             $table->string('image')->nullable();
             $table->longtext('summary')->nullable();
             $table->boolean('status');

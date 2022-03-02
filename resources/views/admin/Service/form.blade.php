@@ -1,39 +1,48 @@
 @extends('layouts.admin-app')
 @section('content')
-<section class="content">
-	<div class="container-fluid">
-		@if(isset($service))
-		<form action="{{route('service.update', $service)}}" method="post" enctype="multipart/form-data">
-			{{method_field('PATCH')}}
-			@else
-			<form action="{{route('service.store')}}" method="post" enctype="multipart/form-data">
-				@endif
-				<div class="row">
-					<div class="col-md-6">
-						<div class="card card-primary">
-							@csrf
-							<div class="card-header">
-								<div class="card-title">service @if(isset($service)) Update @else Addon @endif Form </div>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<label for="title">Service Name:</label>
-									<input type="text" name="name" class="form-control" placeholder="Enter service  Name" value="{{old('name', @$service->name)}}">
-									@error('name')
-									<span class="alert alert-danger">{{$message}}</span>
-									@enderror
-								</div>
-                                <div class="form-group">
-									<label for="title">Category Name:</label>
-									<input type="text" name="category_name" class="form-control" placeholder="Enter category service  Name" value="{{old('category_name', @$service->category_name)}}">
-									@error('category_name')
-									<span class="alert alert-danger">{{$message}}</span>
-									@enderror
-								</div>
-								{{-- <div class="form-group">
+    <section class="content">
+        {{ Breadcrumbs::render('service.create') }}
+
+        <div class="container-fluid">
+            @if (isset($service))
+                <form action="{{ route('service.update', $service) }}" method="post" enctype="multipart/form-data">
+                    {{ method_field('PATCH') }}
+                @else
+                    <form action="{{ route('service.store') }}" method="post" enctype="multipart/form-data">
+            @endif
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        @csrf
+                        <div class="card-header">
+                            <div class="card-title">Service @if (isset($service))
+                                    Update
+                                @else
+                                    Addon
+                                @endif Form </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Service Title: </label>
+                                <input type="text" name="title" class="form-control" placeholder="Enter service  Name"
+                                    value="{{ old('title', @$service->title) }}">
+                                @error('title')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Category Name:</label>
+                                <input type="text" name="category_name" class="form-control"
+                                    placeholder="Enter category service  Name"
+                                    value="{{ old('category_name', @$service->category_name) }}">
+                                @error('category_name')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- <div class="form-group">
 									<label for="title">Belongs To:</label>
 									<select name="service_category" class="form-control form-control-sm">
-										@if(isset($service))
+										@if (isset($service))
 										 <option value="{{$service->category->id}}">{{$service->category->name}}</option>
 										 @else
 										 <option value="">Please Choose a Category</option>
@@ -41,8 +50,8 @@
                                          <option value="">Consulting</option>
                                          <option value="">Auditing</option>
 										@endif
-										@if(isset($serviceCategories) && count($serviceCategories)>0)
-										@foreach($serviceCategories as $category)
+										@if (isset($serviceCategories) && count($serviceCategories) > 0)
+										@foreach ($serviceCategories as $category)
 										 <option value="{{$category->id}}">
 										 	{{$category->name}}
 										 </option>
@@ -53,23 +62,23 @@
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror
 								</div> --}}
-								<div class="form-group">
-									<label>Choose Thumbnail:</label><br>
-									<label for="image">
-										<input type="file" name="thumbnail" placeholder="Choose An image">
-									</label>
-									@error('thumbnail')
-									<span>{{$message}}</span>
-									@enderror
-								</div>
+                            <div class="form-group">
+                                <label>Choose Thumbnail:</label><br>
+                                <label for="image">
+                                    <input type="file" name="thumbnail" placeholder="Choose An image">
+                                </label>
+                                @error('thumbnail')
+                                    <span>{{ $message }}</span>
+                                @enderror
+                            </div>
 
-								{{-- <div class="form-group">
+                            {{-- <div class="form-group">
 									<label>Choose Multiple image</label>
 									<div class="row">
 										<div id="coba" class="row"></div>
 									</div>
 								</div> --}}
-								{{-- <div class="row">
+                            {{-- <div class="row">
 									<div class="col-md-3 col-lg-3">
 										<div class="form-group">
 											<label>Duration In Days</label>
@@ -127,15 +136,16 @@
 										</div>
 									</div>
 								</div> --}}
-								<div class="form-group">
-									<label for="title">Summary</label>
-									<textarea class="form-control" style="height: 100px;" name="summary">{{old('summary', @$service->summary)}}</textarea>
-									@error('summary')
-									<span class="alert alert-danger">{{$message}}</span>
-									@enderror
-								</div>
-								<div class="card card-info">
-									{{-- <div class="card-header">
+                            <div class="form-group">
+                                <label for="title">Summary</label>
+                                <textarea class="form-control" style="height: 100px;"
+                                    name="summary">{{ old('summary', @$service->summary) }}</textarea>
+                                @error('summary')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="card card-info">
+                                {{-- <div class="card-header">
 										<div class="card-title">
 											Description
 										</div>
@@ -143,7 +153,7 @@
 											<button type="button" class="btn btn-primary float-right" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-arrow-down"></i></button>
 										</div>
 									</div> --}}
-									{{-- <div class="card-body @if(!isset($service)) collapse @endif" id="collapseExample">
+                                {{-- <div class="card-body @if (!isset($service)) collapse @endif" id="collapseExample">
 										<div class="form-group">
 											<label for="title">Top Overview</label>
 											<textarea class="form-control editor" style="height: 150px;" name="trip_overview">{{old('trip_overview', @$service->trip_overview)}}</textarea>
@@ -173,87 +183,94 @@
 											@enderror
 										</div>
 									</div> --}}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="card card-info">
-							<div class="card card-header">
-								<div class="card-title">Your Page Info</div>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<label for="title">Title Tag:</label>
-									<input type="text" name="title_tag" class="form-control" value="{{old('title_tag', @$service->title_tag)}}">
-									@error('title_tag')
-									<span class="alert alert-danger">{{$message}}</span>
-									@enderror
-								</div>
-								<div class="form-group">
-									<label for="title">Meta Keywords</label>
-									<textarea class="form-control" style="height: 200px;" name="meta_keywords">{{old('meta_keywords', @$service->meta_keywords)}}</textarea>
-									@error('meta_keywords')
-									<span class="alert alert-danger">{{$message}}</span>
-									@enderror
-								</div>
-								<div class="form-group">
-									<label for="title">Meta Description</label>
-									<textarea class="form-control" style="height: 200px;" name="meta_description">{{old('meta_description', @$service->meta_description)}}</textarea>
-									@error('meta_description')
-									<span class="alert alert-danger">{{$message}}</span>
-									@enderror
-								</div>
-							</div>
-							<div class="card-footer">
-								<div>
-									<button type="submit" class="btn btn-primary btn-lg float-right">
-									@if(isset($service)) Update @else Save @endif
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</section>
-	@endsection
-	@push('js')
-	<script type="text/javascript" src="{{asset('image_picker/spartan-multi-image-picker.js')}}"></script>
-	<script type="text/javascript">
-		$(function(){
-			$("#coba").spartanMultiImagePicker({
-				fieldName:        'images[]',
-				maxCount:         5,
-				rowHeight:        '200px',
-				groupClassName:   'col-md-4 col-sm-4 col-xs-6',
-				maxFileSize:      '',
-				placeholderImage: {
-				image: "{{asset('image_picker/placeholder.png')}}",
-				width : '100%'
-				},
-				dropFileLabel : "Drop Here",
-				onAddRow:       function(index){
-					console.log(index);
-					console.log('add new row');
-				},
-				onRenderedPreview : function(index){
-					console.log(index);
-					console.log('preview rendered');
-				},
-				onRemoveRow : function(index){
-					console.log(index);
-				},
-				onExtensionErr : function(index, file){
-					console.log(index, file,  'extension err');
-					alert('Please only input png or jpg type file')
-				},
-				onSizeErr : function(index, file){
-					console.log(index, file,  'file size too big');
-					alert('File size too big');
-				}
-			});
-		});
-	</script>
-	@endpush
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-info">
+                        <div class="card card-header">
+                            <div class="card-title">Your Page Info</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Title Tag:</label>
+                                <input type="text" name="title_tag" class="form-control"
+                                    value="{{ old('title_tag', @$service->title_tag) }}">
+                                @error('title_tag')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Meta Keywords</label>
+                                <textarea class="form-control" style="height: 200px;"
+                                    name="meta_keywords">{{ old('meta_keywords', @$service->meta_keywords) }}</textarea>
+                                @error('meta_keywords')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Meta Description</label>
+                                <textarea class="form-control" style="height: 200px;"
+                                    name="meta_description">{{ old('meta_description', @$service->meta_description) }}</textarea>
+                                @error('meta_description')
+                                    <span class="alert alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg float-right">
+                                    @if (isset($service))
+                                        Update
+                                    @else
+                                        Save
+                                    @endif
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </section>
+@endsection
+@push('js')
+    <script type="text/javascript" src="{{ asset('image_picker/spartan-multi-image-picker.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#coba").spartanMultiImagePicker({
+                fieldName: 'images[]',
+                maxCount: 5,
+                rowHeight: '200px',
+                groupClassName: 'col-md-4 col-sm-4 col-xs-6',
+                maxFileSize: '',
+                placeholderImage: {
+                    image: "{{ asset('image_picker/placeholder.png') }}",
+                    width: '100%'
+                },
+                dropFileLabel: "Drop Here",
+                onAddRow: function(index) {
+                    console.log(index);
+                    console.log('add new row');
+                },
+                onRenderedPreview: function(index) {
+                    console.log(index);
+                    console.log('preview rendered');
+                },
+                onRemoveRow: function(index) {
+                    console.log(index);
+                },
+                onExtensionErr: function(index, file) {
+                    console.log(index, file, 'extension err');
+                    alert('Please only input png or jpg type file')
+                },
+                onSizeErr: function(index, file) {
+                    console.log(index, file, 'file size too big');
+                    alert('File size too big');
+                }
+            });
+        });
+    </script>
+@endpush

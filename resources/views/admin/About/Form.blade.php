@@ -1,6 +1,7 @@
 @extends('layouts.admin-app')
 @section('content')
 <section class="content">
+    {{ Breadcrumbs::render('about.create') }}
 	<div class="container-fluid">
 		@if(isset($about))
 		<form action="{{route('about.update', $about)}}" method="post" enctype="multipart/form-data">
@@ -13,7 +14,7 @@
 						<div class="card card-warning">
 							@csrf
 							<div class="card-header">
-								<div class="card-title">about @if(isset($about)) Update @else Addon @endif Form </div>
+								<div class="card-title">About @if(isset($about)) Update @else Addon @endif Form </div>
 							</div>
                             {{-- title --}}
 							<div class="card-body">
@@ -64,7 +65,7 @@
                                 {{-- Happy clients --}}
                                 <div class="form-group">
 									<label for="number">Happy Clients</label>
-									<input type="number" name="happy_clientss" class="form-control" placeholder="Enter happy clients" value="{{old('happy_clients', @$about->happy_clients)}}">
+									<input type="number" name="happy_clients" class="form-control" placeholder="Enter happy clients" value="{{old('happy_clients', @$about->happy_clients)}}">
 									@error('happy_clients')
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror

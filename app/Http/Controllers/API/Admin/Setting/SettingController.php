@@ -44,10 +44,12 @@ class SettingController extends Controller
     {
         //
         $setting = Setting::find(1);
+        // dd($setting);
         if (!$setting) {
             return view($this->folderName . 'form', [
                 'activePage' => 'setting',
                 'title' => 'setting'
+
             ]);
         }
         else {

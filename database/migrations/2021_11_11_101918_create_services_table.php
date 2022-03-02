@@ -21,10 +21,10 @@ class CreateServicesTable extends Migration
             $table->string('image', 100)->nullable()->default('text');
             $table->longText('description')->nullable()->default('text');
             $table->integer('created_by')->unsigned()->nullable()->default(12);
-            $table->longText('summary');
-            $table->longText('title_tag');
-            $table->longText('meta_description');
-            $table->longText('meta_keywords');
+            $table->longText('summary')->default('text');
+            $table->longText('title_tag')->default('text');;
+            $table->longText('meta_description')->default('text');;
+            $table->longText('meta_keywords')->default('text');;
             $table->string('thumbnail');
             $table->string('slug')->nullable();
             $table->string('category_name')->nullable()->default('text');

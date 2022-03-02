@@ -2,12 +2,13 @@
 @extends('layouts.admin-app')
 @section('content')
 <section class="content">
+    {{ Breadcrumbs::render('contact.index') }}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">contact List</h3>
+						<h3 class="card-title">Contact List</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">

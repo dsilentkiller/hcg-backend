@@ -1,6 +1,7 @@
 @extends('layouts.admin-app')
 @section('content')
 <section class="content">
+    {{ Breadcrumbs::render('banner.show') }}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="container">

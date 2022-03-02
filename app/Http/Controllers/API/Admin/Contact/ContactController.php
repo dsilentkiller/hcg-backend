@@ -65,6 +65,15 @@ class ContactController extends Controller{
             public function store(Request $request)
             {
             //
+            // $request->validate([
+            //     'name'=>'string|required|max:50',
+            //     // 'description'=>'string|nullable',
+            //     // 'email' =>'string!required',
+            //     'subject'=>'string|required|max:500',
+            //     'message'=>'string!required',
+            //     // 'image'=>'string|required',
+            //     // 'status'=>'required|in:active,inactive',
+            // ]);
             $this->contact->fill($request->all());
             $image = $this->imageSupport->saveAnyImg($request,'contact','image', $this->imageWidth, $this->imageHeight);
             $this->contact->image = $image;
@@ -118,6 +127,15 @@ class ContactController extends Controller{
             */
             public function update(Request $request, contact $contact)
             {
+                // $request->validate([
+                //     'name'=>'string|required|max:50',
+                //     // 'description'=>'string|nullable',
+                //     // 'email' =>'string',
+                //     'subject'=>'string|required|max:500',
+                //     'message'=>'string!required',
+                //     // 'image'=>'string|required',
+                //     // 'status'=>'required|in:active,inactive',
+                // ]);
             $this->contact = $contact;
             $this->contact->fill($request->all());
             $this->contact->created_by = Auth::User()->id;

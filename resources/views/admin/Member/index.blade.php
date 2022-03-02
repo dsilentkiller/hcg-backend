@@ -1,12 +1,13 @@
 @extends('layouts.admin-app')
 @section('content')
 <section class="content">
+    {{ Breadcrumbs::render('member.index') }}
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">member List</h3>
+						<h3 class="card-title">Member List</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -34,7 +35,7 @@
 										<a href="mailto:{{$member->email}}">{{$member->email}}</a>
 									</td>
 									<td>{{Substr($member->summary, 0, 200)}}</td>
-									<td><a href="{{route('member.show', $member)}}">View</a></td>
+									{{-- <td><a href="{{route('member.show', $member)}}">View</a></td> --}}
 									<td><a href="{{route('member.edit', $member)}}">Edit</a></td>
 									<td>
 										<form action="{{route('member.destroy', $member)}}" method="post">

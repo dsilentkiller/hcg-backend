@@ -87,7 +87,8 @@ class MemberController extends Controller
             //
             return view($this->folderName.'member',[
                 'activePage' =>'member',
-                'blog'=>$member,
+                'member'=>$member,
+                'page'=> 'member',
             ]);
         }
 

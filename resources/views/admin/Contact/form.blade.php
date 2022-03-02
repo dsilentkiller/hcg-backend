@@ -2,6 +2,8 @@
 @extends('layouts.admin-app')
 @section('content')
 <section class="content">
+    {{ Breadcrumbs::render('contact.create') }}
+
 	<div class="container-fluid">
 		@if(isset($contact))
 		<form action="{{route('contact.update', $contact)}}" method="post" enctype="multipart/form-data">
@@ -38,7 +40,7 @@
 									<label for="number">Contact  Number</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">+977</span>
-                                        <input type="number" class="form-control" aria-label="max 10 digit number" name="contact_no"  placeholder="mobile number " value="{{old('contact_no', @$property->contact_no)}}">
+                                        <input type="number" class="form-control" aria-label="max 10 digit number" name="contact_no"  placeholder="mobile number " value="{{old('contact_no', @$contact->contact_no)}}">
                                       </div>
 									@error('contact_no')
 									<span class="alert alert-danger">{{$message}}</span>
@@ -56,7 +58,7 @@
                                  {{-- Subject--}}
 								<div class="form-group">
 									<label for="name">Subject</label>
-									<textarea class="form-control editor" style="height: 150px;" name="subject">{{old('Subject', @$contact->subject)}}</textarea>
+									<textarea class="form-control editor" style="height: 150px;" name="subject">{{old('subject', @$contact->subject)}}</textarea>
 									@error('subject')
 									<span class="alert alert-danger">{{$message}}</span>
 									@enderror
